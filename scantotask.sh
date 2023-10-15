@@ -2,8 +2,9 @@
 temp_png_file=$(mktemp -u --suffix=.png -q)
 temp_txt_file=$(mktemp -u --suffix=.txt -q)
 temp_txt_file_without_suffix=$(dirname $temp_txt_file)/$(basename -s .txt $temp_txt_file)
+scanner=$(scanimage -L | awk  '{print substr($2,2,length($2)-2);}')
 scanimage \
-  -d 'mustek_usb:libusb:001:003' \
+  -d $scanner \
   --format=png \
   -o $temp_png_file \
   --mode Lineart \
